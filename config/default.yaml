@@ -1,0 +1,31 @@
+model:
+  path: "../models/llama-2-7b.Q4_0.gguf"  # relative to scripts dir
+  name: "llama-2-7b-Q4_0"
+
+inference:
+  seed: 42
+  temperature: 0.0
+  max_tokens: 256
+  n_gpu_layers: 99
+  llama_cli_path: "llama-cli"  # assumes on PATH
+
+prompts:
+  - id: "light"
+    text: "What is the nature of light?"
+  - id: "silence"
+    text: "Write a short paragraph about silence."
+  - id: "bridges"
+    text: "Explain why bridges are beautiful."
+  - id: "attention"
+    text: "What happens when you pay close attention to something?"
+
+baseline:
+  n_runs: 100
+
+experiment:
+  n_runs: 100
+  conditions:
+    - "unattended"
+    - "operator_a"
+    - "operator_b"
+    - "distracted"

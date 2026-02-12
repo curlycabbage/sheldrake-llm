@@ -1,0 +1,7 @@
+models/
+data/baseline/*.json
+data/runs/*.json
+data/plots/
+__pycache__/
+*.pyc
+.env

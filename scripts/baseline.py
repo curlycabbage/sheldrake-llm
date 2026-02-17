@@ -20,7 +20,7 @@ DATA_DIR = Path(__file__).parent.parent / "data" / "baseline"
 
 
 def run_inference(config, prompt_text):
-    """Run a single inference via llama-cli and return the output text."""
+    """Run a single inference via llama-completion and return the output text."""
     model_path = resolve_model_path(config)
     inf = config["inference"]
 
@@ -44,7 +44,7 @@ def run_inference(config, prompt_text):
 
     if result.returncode != 0:
         raise RuntimeError(
-            f"llama-cli failed (exit {result.returncode}):\n{result.stderr}"
+            f"llama-completion failed (exit {result.returncode}):\n{result.stderr}"
         )
 
     return result.stdout

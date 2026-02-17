@@ -19,7 +19,7 @@ from utils import (
 DATA_DIR = Path(__file__).parent.parent / "data" / "baseline"
 
 
-def run_inference(config, prompt_text):
+def run_inference(config, prompt_text, seed=None):
     """Run a single inference via llama-completion and return the output text."""
     model_path = resolve_model_path(config)
     inf = config["inference"]
@@ -29,7 +29,7 @@ def run_inference(config, prompt_text):
         "-m", model_path,
         "-p", prompt_text,
         "-n", str(inf["max_tokens"]),
-        "--seed", str(inf["seed"]),
+        "--seed", str(seed if seed is not None else inf["seed"]),
         "--temp", str(inf["temperature"]),
         "-ngl", str(inf["n_gpu_layers"]),
         "--no-display-prompt",

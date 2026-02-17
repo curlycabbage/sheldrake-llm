@@ -45,16 +45,17 @@ def main():
         sys.exit(1)
 
     prompt = prompts[0]
-    seed = config["inference"]["seed"]
+    base_seed = config["inference"]["seed"]
     runs = []
 
-    log.info("Variance check: %d runs, temp=%.1f, prompt='%s'", args.n_runs, args.temp, args.prompt_id)
+    log.info("Variance check: %d runs, temp=%.1f, prompt='%s' (varying seeds)", args.n_runs, args.temp, args.prompt_id)
 
     for i in range(args.n_runs):
         ts = timestamp_now()
-        log.info("  Run %d/%d", i + 1, args.n_runs)
+        seed = base_seed + i
+        log.info("  Run %d/%d (seed=%d)", i + 1, args.n_runs, seed)
 
-        output = run_inference(config, prompt["text"])
+        output = run_inference(config, prompt["text"], seed=seed)
 
         filename = make_run_filename("varcheck", seed, i, ts, prompt_id=args.prompt_id)
         run_data = {

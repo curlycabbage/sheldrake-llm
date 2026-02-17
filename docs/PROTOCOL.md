@@ -65,7 +65,18 @@ Record the following in a session log before proceeding:
 
 Establish the mechanical noise floor: how much variance does the system produce with no changes to any parameter?
 
-### 2.2 Procedure
+### 2.2 Determinism Model
+
+Our setup has two independent layers of determinism:
+
+1. **Temperature = 0 (greedy sampling):** The model always selects the highest-probability token. No randomness is involved.
+2. **Fixed seed:** The seed initializes the random number generator (RNG). Even if temperature were > 0, a fixed seed produces the same RNG sequence and therefore the same sampled tokens every run.
+
+This means that with `seed=42, temp=0`, output is fully determined by the model weights and prompt alone. Any divergence under operator conditions cannot be attributed to sampling randomness — it would require something to change in the computation itself.
+
+**Validating detection:** To confirm our comparison logic can actually detect variance, use `scripts/variance_check.py`, which runs inferences with temp > 0 and *different seeds per run*. Both conditions (temp > 0 AND varying seeds) are needed to produce divergence — changing only one is not sufficient.
+
+### 2.3 Procedure
 
 1. Close all unnecessary applications on the Windows host.
 2. Let the GPU reach thermal equilibrium (idle for 5 minutes).
@@ -80,23 +91,23 @@ Establish the mechanical noise floor: how much variance does the system produce 
    python3 baseline.py --n-runs 1000
    ```
 
-### 2.3 Thermal and Temporal Checks
+### 2.4 Thermal and Temporal Checks
 
 1. Run a baseline batch in the morning and another in the evening.
 2. Run a baseline batch after heavy GPU use (gaming, rendering) vs. cold start.
 3. Compare results across these conditions to check for thermal/load effects.
 
-### 2.4 Prompt Length Check
+### 2.5 Prompt Length Check
 
 Run baselines with prompts of varying lengths to check if variance scales with generation length. The default config includes prompts of different complexity for this purpose.
 
-### 2.5 Success Criteria
+### 2.6 Success Criteria
 
 - If 100% of runs produce identical output: excellent. The noise floor is zero and even tiny operator effects would be detectable.
 - If <100% identical: characterize the variance. Where do tokens first diverge? Is the divergence point consistent or random? What is the distribution of divergence points across runs?
 - If variance is high and unpatterned: the experimental apparatus may lack the precision needed. Consider switching to CPU inference (fully deterministic but slower) or using a different model/quantization.
 
-### 2.6 Outputs
+### 2.7 Outputs
 
 - Individual run files in `data/baseline/`
 - Summary statistics printed to console

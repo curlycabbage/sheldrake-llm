@@ -62,6 +62,23 @@
 ### Files
 - Created: 10 JSON files in `data/baseline/`
 
+## Session 3: Variance detection validation - 2026-02-16
+
+### Completed
+- Created `variance_check.py` to confirm detection system catches real variance
+- Initial run (same seed, temp=0.8): all identical — revealed that fixed seed makes even temp>0 deterministic
+- Fixed: vary seed per run (42, 43, 44...); rerun showed 10 unique outputs from 10 runs
+- Added determinism model section (2.2) to PROTOCOL.md explaining both layers of determinism
+- Fixed misleading output text ("9 of 10 diverged" → "10 unique outputs from 10 runs")
+
+### Learnings
+- Fixed seed + any temperature = deterministic output; variance requires both temp>0 AND varying seeds
+- `compare_outputs` always counts run 0 as "identical" (compared to itself)
+
+### Files
+- Created: `scripts/variance_check.py`
+- Modified: `scripts/baseline.py` (seed override param), `docs/PROTOCOL.md`
+
 ## Phase 2: Baseline Characterization
 
 Not yet started.

@@ -80,8 +80,11 @@ def main():
     stats = compare_outputs(runs)
     print_summary(args.prompt_id, stats)
 
+    # compare_outputs counts the reference run (run 0) as "identical" to itself,
+    # so N-1 divergent out of N total means all runs produced unique output.
+    n_unique = len(stats["divergent"]) + 1  # +1 for the reference run itself
     if stats["divergent"]:
-        print(f"\nVariance detected: {len(stats['divergent'])} of {stats['total']} runs diverged.")
+        print(f"\n{n_unique} unique outputs from {stats['total']} runs.")
         print("Detection system is working correctly.")
     else:
         print(f"\nWARNING: All {stats['total']} runs were identical at temp={args.temp}.")

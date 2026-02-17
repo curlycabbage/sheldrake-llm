@@ -1,6 +1,7 @@
 models/
 data/baseline/*.json
 data/runs/*.json
+data/variance_check/
 data/plots/
 __pycache__/
 *.pyc

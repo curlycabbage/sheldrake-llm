@@ -32,7 +32,11 @@
 - AMD Adrenalin 26.1.1 (updated 2026-02-16)
 
 **Model:**
-- Not yet downloaded
+- llama-2-7b.Q4_0.gguf (3.83GB) from TheBloke/Llama-2-7B-GGUF
+- Location: `~/models/llama-2-7b.Q4_0.gguf`
+- Verified working: 73.0 t/s generation, 284.2 t/s prompt processing
+
+**Phase 1 status: COMPLETE**
 
 ## Phase 2: Baseline Characterization
 

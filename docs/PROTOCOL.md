@@ -25,7 +25,7 @@
    cmake -B build -DGGML_HIP=ON -DAMDGPU_TARGETS=gfx1101
    cmake --build build --config Release -j$(nproc)
    ```
-3. Verify `llama-cli` is on PATH or note its absolute path for config.
+3. Verify `llama-completion` is on PATH or note its absolute path for config.
 4. Record the exact llama.cpp commit hash: `git rev-parse HEAD`
 
 ### 1.4 Model Download
@@ -43,7 +43,7 @@
 
 1. Run a single inference manually:
    ```bash
-   llama-cli -m ../models/llama-2-7b.Q4_0.gguf -p "Hello" -n 64 --seed 42 --temp 0 -ngl 99
+   llama-completion -m ../models/llama-2-7b.Q4_0.gguf -p "Hello" -n 64 --seed 42 --temp 0 -ngl 99 --no-display-prompt --simple-io --no-perf
    ```
 2. Confirm output is generated and GPU is being used (check `rocm-smi` during inference).
 3. Run the same command twice and compare outputs to get an initial sense of determinism.
@@ -72,12 +72,12 @@ Establish the mechanical noise floor: how much variance does the system produce 
 3. Run the baseline script:
    ```bash
    cd scripts/
-   python baseline.py
+   python3 baseline.py
    ```
 4. Default: 100 runs per prompt, seed=42, temperature=0, max_tokens=256.
 5. For thorough characterization, increase to N=1000:
    ```bash
-   python baseline.py --n-runs 1000
+   python3 baseline.py --n-runs 1000
    ```
 
 ### 2.3 Thermal and Temporal Checks
@@ -128,7 +128,7 @@ Run baselines with prompts of varying lengths to check if variance scales with g
 2. Run the experiment script:
    ```bash
    cd scripts/
-   python experiment.py --condition operator_a
+   python3 experiment.py --condition operator_a
    ```
 3. Enter operator name and attention rating (1-5) when prompted.
 4. The script runs N=100 inferences with identical parameters.
@@ -157,7 +157,7 @@ Commit all analysis code (`scripts/analyze.py`) before examining experimental da
 1. Run the analysis script:
    ```bash
    cd scripts/
-   python analyze.py
+   python3 analyze.py
    ```
 2. The script will:
    - Load all baseline and experiment runs

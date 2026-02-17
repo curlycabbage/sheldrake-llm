@@ -38,6 +38,20 @@
 
 **Phase 1 status: COMPLETE**
 
+## Session 1: Clone and verify - 2026-02-16
+
+### Completed
+- Updated `config/default.yaml`: absolute model path, llama_cli_path confirmed as `llama-completion`
+- Fixed `baseline.py` output capture: replaced `--log-disable` with `--no-display-prompt --simple-io --no-perf`
+- Ran single test inference (`--n-runs 1 --prompt-id light`): clean completion text in output JSON
+
+### Learnings
+- `llama-completion --log-disable` suppresses completion output along with logs; `--simple-io --no-display-prompt` gives clean stdout
+- Installed pyyaml + matplotlib via `pip3 install --break-system-packages`
+
+### Files
+- Modified: `config/default.yaml`, `scripts/baseline.py`
+
 ## Phase 2: Baseline Characterization
 
 Not yet started.

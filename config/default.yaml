@@ -1,5 +1,5 @@
 model:
-  path: "../models/llama-2-7b.Q4_0.gguf"  # relative to scripts dir
+  path: "../../models/llama-2-7b.Q4_0.gguf"
   name: "llama-2-7b-Q4_0"
 
 inference:

@@ -32,7 +32,9 @@ def run_inference(config, prompt_text):
         "--seed", str(inf["seed"]),
         "--temp", str(inf["temperature"]),
         "-ngl", str(inf["n_gpu_layers"]),
-        "--log-disable",
+        "--no-display-prompt",
+        "--simple-io",
+        "--no-perf",
     ]
 
     result = subprocess.run(

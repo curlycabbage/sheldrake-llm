@@ -14,7 +14,7 @@ Experimental framework testing whether human operator presence affects determini
 - `scripts/analyze.py` — Phase 4: analysis and visualization
 - `scripts/utils.py` — shared utilities (config loading, output comparison, file naming)
 - `docs/PROGRESS.md` — append-only session log (see format below)
-- `SESSIONS.md` — upcoming session prompts
+- `docs/SESSIONS.md` — upcoming session prompts
 
 ## Style
 
@@ -51,6 +51,23 @@ Guidelines:
 - Date format: YYYY-MM-DD
 - Omit Decisions/Learnings sections if nothing notable
 - Append only — never edit previous session entries
+
+## Commit Format
+
+```
+implements Session [N]: [Title from PROGRESS.md]
+
+why: [one-line rationale]
+what: [one-line implementation summary]
+status: complete
+ref: docs/PROGRESS.md (Session [N], [YYYY-MM-DD])
+```
+
+Guidelines:
+- Subject: lowercase "implements", capital "Session"
+- `why`/`what` derived from the PROGRESS.md session entry
+- Do not invent work not in the changeset
+- If no PROGRESS entry exists yet, log progress before committing
 
 ## Hardware (big-pc)
 

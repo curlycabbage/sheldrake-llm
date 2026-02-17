@@ -52,6 +52,16 @@
 ### Files
 - Modified: `config/default.yaml`, `scripts/baseline.py`
 
+## Session 2: Quick baseline smoke test - 2026-02-16
+
+### Completed
+- Ran 10 inferences with prompt "light" (seed=42, temp=0, 256 max tokens)
+- Result: **10/10 identical** — noise floor is zero
+- ~7s per run (~70 t/s generation)
+
+### Files
+- Created: 10 JSON files in `data/baseline/`
+
 ## Phase 2: Baseline Characterization
 
 Not yet started.
